@@ -1,0 +1,87 @@
+cues: {
+    # Rendering is done back to front in the render order
+    stripes: {
+        _group_params: {
+            render_order: 0
+        },
+
+        stripes: {
+            shape: 'stripes',
+            theta: 0.0,
+            phi: 45.0,
+            fade_in_ms: 0.0,
+            fade_out_ms: 0.0,
+            visible: true,
+        }
+    },
+
+    landmarks: {
+        _group_params: {
+            render_order: 1
+        },
+
+        vertbar:    {
+            shape: 'vertical_bar',
+            theta: 270.0,
+            phi: 40.0,
+            fade_in_ms: 0.0,
+            fade_out_ms: 0.0,
+            visible: true,
+        },
+        
+        ellipse: {
+            shape: 'horizontal_ellipse',
+            theta: 180.0,
+            phi: 40.0,
+            fade_in_ms: 0.0,
+            fade_out_ms: 0.0,
+            visible: true,
+        },
+        
+        pizza: {
+            shape: 'pizza',
+            theta: 30.0,
+            phi: 40.0,
+            fade_in_ms: 0.0,
+            fade_out_ms: 0.0,
+            visible: true,
+        },
+    },
+
+    band: {
+        _group_params: {
+            render_order: 3
+        },
+
+        band: {
+            shape: 'band',
+            theta: 0.0,
+            phi: 90.0,
+            fade_in_ms: 0.0,
+            fade_out_ms: 0.0,
+            visible: true,
+        }
+    },
+
+    zero_calibration: {
+        zero_calibration: {
+            shape: 'thin_stripe',
+            theta: 0.0,
+            phi: 45.0,
+            fade_in_ms: 0.0,
+            fade_out_ms: 0.0,
+            visible: false,
+        }
+    },
+
+    grid: {
+        grid: {
+            shape: 'grid',
+            theta: 0.0,
+            phi: 90.0,
+            fade_in_ms: 0.0,
+            fade_out_ms: 0.0,
+            visible: false,
+        }
+    },
+}

@@ -1,0 +1,10 @@
+<launch>
+
+<!-- GLOBAL PARAMS -->
+    <param name="gearRatio" type="int" value="5" />
+
+    <node name="daq_interface" pkg="daq_interface" type="daq_interface" />
+    <node name="EncoderPublisher" pkg="dome" type="EncoderPublisher" />
+    <node name="domeZListener" pkg="dome" type="ZListener" />
+
+</launch>

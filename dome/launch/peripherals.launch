@@ -1,0 +1,14 @@
+<launch>
+<!-- DAQ node should be launched and parameters set before this -->
+
+<!-- PERIPHERALS -->
+    <node name="domeEncoderPublisher" pkg="dome" type="EncoderPublisher" output="screen"/>
+    <node name="domeZListener" pkg="dome" type="ZListener"/>
+    <node name="domeSyncSender" pkg="dome" type="SyncSender" />
+    <node name="domeFeedServer" pkg="dome" type="FeedServer" />
+    <!--<node name="domeJoystickPublisher" pkg="dome" type="joystick_publisher.py"/>-->
+    <node name="domeCommutation" pkg="dome" type="commutation.py"/>
+
+    <node name="domeExperimentController" pkg="dome" type="experiment_controller.py"/>
+<!-- VISUAL and GUI are launched in separate terminals -->
+</launch>

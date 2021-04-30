@@ -1,0 +1,43 @@
+#include "Polygon.h"
+
+#define PI 3.1415926535897932384626433832795
+
+Polygon::Polygon (void) : DomeShape() {
+	n = randi(3,10);
+	a = randd(0.5,5);	
+}
+
+Polygon::Polygon (int n_i, double a_i) : DomeShape() {
+	if (n_i<3) n=3;
+	else n = n_i;
+	a = a_i;	
+}
+
+Polygon::Polygon (int n_i,double a_i, double th_i, double ph_i) : DomeShape(th_i,ph_i) {
+	if (n_i<3) n=3;
+	else n = n_i;
+	a = a_i;	
+}
+
+int Polygon::getN(void) {
+	return n;
+	}
+
+double Polygon::getA(void) {
+	return a;
+	}
+
+void Polygon::render(double R) {
+	glPushMatrix();
+	
+	moveToDome(R);
+	glBegin(GL_POLYGON);
+	double ang;
+		for (double i=0;i<n;i++) {
+			ang = PI/2 + PI/n + i*2*PI/n;
+			glVertex3f(a/sqrt(n)*cos(ang),a/sqrt(n)*sin(ang),0);
+		}
+	glEnd();
+
+	glPopMatrix();
+}

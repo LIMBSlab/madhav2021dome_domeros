@@ -1,0 +1,16 @@
+<library path="src">
+  <class name="DomeDashboard" type="rqt_dome_interface.dome_interface_dashboard.DomeDashboard" base_class_type="rqt_gui_py::Plugin">
+    <description>
+        An rqt-based GUI for dome experiments.
+    </description>
+    <qtgui>
+      <group>
+        <label>Dome</label>
+      </group>
+      <label>Dome Dashboard</label>
+      <icon type="theme">system-help</icon>
+      <statustip>Use to control the liquid reward.</statustip>
+    </qtgui>
+  </class>
+</library>
+

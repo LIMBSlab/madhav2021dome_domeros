@@ -1,0 +1,13 @@
+<launch>
+
+<machine
+    name="dometracking"
+    address="dometracking"
+    user="dometracking"
+    timeout="10"
+  />
+
+<node machine="dometracking" name="camera_viewer" pkg="image_view" type="image_view" args="image:=/camera/image_mono" />
+
+
+</launch>

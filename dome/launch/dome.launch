@@ -1,0 +1,21 @@
+<launch>
+  <!--node name="statusCamServer" pkg="gscam" type="gscam" /-->
+  <!--node name="statusCamViewer" pkg="image_view" type="image_view" args="image:=/camera/image_raw" /-->
+
+  <node name="domeGUI" pkg="rqt_gui" type="rqt_gui" />
+
+  <node name="domeCamServer" pkg="ueye" type="camera"/>
+  <node name="domeCamViewer" pkg="image_view" type="image_view" args="image:=/image_raw" />
+
+  <node name="Encoder" pkg="dome" type="Encoder" />
+
+  <node name="VisualScene" pkg="dome" type="VisualScene">
+    <param name="fullScreen" type="bool" value="0" />
+    <param name="posX" type="int" value="500" />
+    <param name="posY" type="int" value="1200" />
+    <param name="width" type="int" value="1000" />
+    <param name="height" type="int" value="1000" />
+    <param name="gain" type="double" value="0.1" />
+  </node>
+
+</launch>

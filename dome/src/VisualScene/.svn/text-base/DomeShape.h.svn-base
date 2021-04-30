@@ -1,0 +1,21 @@
+#ifndef DOMESHAPE_H
+#define DOMESHAPE_H
+
+#include "GL/gl.h"
+#include "helper.h"
+#include <cmath>
+
+class DomeShape {
+	public:
+		DomeShape(void);
+		DomeShape(double,double);
+		
+		double getTh(void);
+		double getPh(void);
+		
+		void moveToDome(double);
+	protected:
+		double th,ph; 		// azimuth and elevation
+};
+
+#endif

@@ -1,0 +1,16 @@
+#ifndef HELPER_H
+#define HELPER_H
+
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <cstdlib>
+#include <string>
+
+using namespace std;
+	
+int randi (int a, int b);
+double randd (double a, double b);
+
+void textOutput(int x, int y, float r, float g, float b, string str);
+
+#endif

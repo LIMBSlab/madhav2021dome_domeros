@@ -1,0 +1,32 @@
+#include "Dot.h"
+
+#define PI 3.1415926535897932384626433832795
+
+Dot::Dot (void) : DomeShape() {
+	r = randd(0.05,0.5);	
+}
+
+Dot::Dot (double r_i) : DomeShape() {
+	r = r_i;	
+}
+
+Dot::Dot (double r_i, double th_i, double ph_i) : DomeShape(th_i,ph_i) {
+	r = r_i;	
+}
+
+double Dot::getR(void) {
+	return r;
+	}
+
+void Dot::render(double R) {
+	glPushMatrix();
+	
+	moveToDome(R);
+	glBegin(GL_POLYGON);
+		for (double i=0;i<2*PI;i+=PI/10) {
+			glVertex3f(r*cos(i),r*sin(i),0);
+		}
+	glEnd();
+
+	glPopMatrix();
+}

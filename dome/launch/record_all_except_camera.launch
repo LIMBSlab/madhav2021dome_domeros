@@ -1,0 +1,5 @@
+<launch>
+
+  <node cwd="ROS_HOME" name="record_data" pkg="rosbag" type="record" args="-a -o domeExperimentData -x '\/camera(.*)'"/>
+
+</launch>

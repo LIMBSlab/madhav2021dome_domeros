@@ -1,0 +1,7 @@
+int32 channel
+float32 duration
+bool persistent
+float32 interval
+---
+bool response
+---

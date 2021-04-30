@@ -1,0 +1,24 @@
+#ifndef DOT_H
+#define DOT_H
+
+#include "DomeShape.h"
+#include "helper.h"
+#include "GL/gl.h"
+#include <cmath>
+
+class Dot : public DomeShape {
+	public:
+        // Constructors
+		Dot(void);
+		Dot(double);
+		Dot(double,double,double);
+
+        // Get and set functions
+		double getR(void);
+
+		void render(double);
+
+	private:
+		double r; 		// radius
+};
+#endif

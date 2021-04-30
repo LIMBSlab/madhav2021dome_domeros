@@ -1,0 +1,9 @@
+all:
+	g++ textfile.cpp helper.cpp DomeShape.cpp Dot.cpp Polygon.cpp opticFlow.cpp -std=c++0x -lGLEW -lGLU -lglut -o flow
+
+clean:
+	rm flow
+
+run:
+	g++ textfile.cpp helper.cpp DomeShape.cpp Dot.cpp Polygon.cpp opticFlow.cpp -std=c++0x -lGLEW -lGLU -lglut -o flow
+	./flow

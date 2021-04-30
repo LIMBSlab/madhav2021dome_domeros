@@ -1,0 +1,3 @@
+<launch>
+<node name="domeGUI" pkg="rqt_gui" type="rqt_gui" args="-p dome_experiment_perspective_v05"/>
+</launch>

@@ -1,0 +1,4 @@
+int32 channel
+int32 prev
+---
+int32 value

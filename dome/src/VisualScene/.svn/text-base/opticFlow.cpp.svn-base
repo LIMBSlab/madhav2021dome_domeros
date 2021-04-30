@@ -1,0 +1,201 @@
+#include <iostream>
+#include <GL/glew.h>
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <string>
+#include <vector>
+#include <array>
+#include <cstdlib>
+#include <cmath>
+#include <ctime>
+#include "Dot.h"
+#include "Polygon.h"
+#include "helper.h"
+#include "textfile.h"
+
+#define PI 3.1415926535897932384626433832795
+
+using namespace std;
+
+/***** GLOBALS *****/
+// Shader params
+GLhandleARB v,p;
+
+// Screen params
+const int SCREEN_POSX = 2000;
+const int SCREEN_POSY = 80;
+const int SCREEN_WIDTH = 900;
+const int SCREEN_HEIGHT = 900;
+const char* TITLE = "Optic Flow Demo";
+
+// Dot params
+double domeRad = 10;
+double dotRad = 0.06;
+double dist = 9;
+double degrees = 0;
+vector<Dot> dots;
+int nDots = 1000;
+Polygon tri(3,0.5,0,PI/3);
+Polygon poly(5,1,PI/2,PI/4);
+
+// FPS params
+int frame;
+time_t time1=0;
+time_t time0=0;
+char msg[100];
+string msgs;
+
+/***** PROTOTYPES *****/
+void initializeScene(void);
+void fpsCounter(void);
+void makeNewDots(int numNewDots);
+void flowdisplay(void);
+void reshape(int w, int h);
+void keyPressed (unsigned char key, int x, int y);
+void setShaders(void);
+int main(int argc, char** argv);
+
+/***** FUNCTIONS *****/
+// OpenGL Initialization function
+void initializeScene (void) {
+	glEnable (GL_DEPTH_TEST);
+	//glEnable( GL_TEXTURE_2D );
+	//glEnable (GL_LIGHTING);
+	//glEnable (GL_LIGHT2);
+	glShadeModel (GL_SMOOTH);
+	glDepthMask(GL_TRUE);
+}
+
+// Construct new Dot objects into the dots vector and randomly assign location
+void makeNewDots(int numNewDots) {
+	for (int i=0; i<numNewDots; i++) {
+		Dot newDot(dotRad);
+		dots.push_back(newDot);
+	}
+}
+
+void fpsCounter(void) {
+	frame++;
+	time1=glutGet(GLUT_ELAPSED_TIME);
+	if (time1 - time0 > 2000) {
+		sprintf(msg,"FPS: %4.2f",frame*1000.0/(time1-time0));
+		time0 = time1;
+		frame = 0;
+	}
+
+	msgs.assign(msg);
+	textOutput(7,-9,0.0,1.0,1.0,msgs);
+
+}
+
+// Main display function
+void flowdisplay(void) {
+	//Kill and resurrect dots according to a death probability
+	double deathProb = 0.003;
+	for(vector<Dot>::size_type i=0; i<dots.size(); i++) {
+		if (randd(0.0,1.0)<deathProb) {
+			dots.erase(dots.begin()+i);
+			makeNewDots(1);
+		}
+	}
+			
+	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	//gluLookAt(0.0,0.0,1.0,
+	//	0.0,0.0,0.0,
+	//	0.0,1.0,0.0);
+	
+	fpsCounter();
+
+	glRotatef(degrees,0.0,0.0,1.0);
+
+	glColor3f(0.3f,0.3f,0.3f);
+	glutWireSphere(domeRad,100,100);
+
+	glColor3f(1.0f,1.0f,1.0f);
+	for(vector<Dot>::size_type i=0; i<dots.size(); i++) {
+		dots[i].render(domeRad);
+	}
+
+	tri.render(domeRad);
+	poly.render(domeRad);
+
+
+	glFlush(); 
+	glutSwapBuffers();
+}
+
+void reshape(int w, int h) {
+	GLdouble aspect = (GLdouble)w / (GLdouble)h;
+
+	glMatrixMode   (GL_PROJECTION);
+	glLoadIdentity ();
+	glOrtho(-domeRad*aspect, domeRad*aspect, -domeRad, domeRad, 0.0, domeRad);
+
+	glMatrixMode   (GL_MODELVIEW);
+	glViewport     (0, 0, w, h);
+}
+
+// Key press function
+void keyPressed (unsigned char key, int x, int y) {  
+	switch (key) {
+		case 'q':
+			exit(0);
+			break;
+		case 'j':
+			degrees -= 0.1;
+			break;
+		case 'k':
+			degrees += 0.1;
+			break;
+		default:
+			;
+	}
+}  
+
+void setShaders(void) {
+
+	char *vs = NULL;
+	v = glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB);
+	vs = textFileRead("mirrorProj.vert");
+	//vs = textFileRead("normalProj.vert");
+	const char * vv = vs;
+	glShaderSourceARB(v, 1, &vv,NULL);
+	free(vs);
+
+	glCompileShaderARB(v);
+
+	p = glCreateProgramObjectARB();
+	glAttachObjectARB(p,v);
+	glLinkProgramARB(p);
+	glUseProgramObjectARB(p);
+}
+
+// Main loop
+int main(int argc, char** argv) {
+	srand(time(NULL));
+	makeNewDots(nDots);
+
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE);
+	glutInitWindowPosition(SCREEN_POSX, SCREEN_POSY);
+	glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	glutCreateWindow(TITLE);
+	initializeScene();
+
+	glutDisplayFunc(flowdisplay);
+	glutIdleFunc(flowdisplay);
+	glutReshapeFunc(reshape);
+	glutKeyboardFunc(keyPressed);
+	
+	glutFullScreen();
+	glewInit();
+	setShaders();
+
+	glutMainLoop();
+	return 0;
+}

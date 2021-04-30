@@ -1,0 +1,40 @@
+#include "DomeShape.h"
+
+#define PI 3.1415926535897932384626433832795
+
+DomeShape::DomeShape (void) {
+    th = randd(0,2*PI);
+    ph = asin(randd(0,1));
+}
+
+
+DomeShape::DomeShape (double th_i, double ph_i) {
+	if (th_i < 0) th = 0;
+	else if (th_i > 2 * PI) th = 2*PI;
+	else th = th_i;
+
+	if (ph_i < 0) ph = 0;
+	else if (ph_i > PI) ph = PI;
+	else ph = ph_i;
+}
+
+double DomeShape::getTh(void) {
+	return th;
+	}
+
+double DomeShape::getPh(void) {
+	return ph;
+	}
+
+// Move model matrix to a point in the dome
+void DomeShape::moveToDome(double R) {
+	/*double M[16] = {-sin(th),cos(th),0,0,
+		cos(th)*cos(ph),sin(th)*cos(ph),-sin(ph),0,
+		cos(th)*sin(ph),sin(th)*sin(ph),cos(ph),0,
+		R*cos(ph)*cos(th),R*cos(ph)*sin(th),-R*sin(ph),1};*/
+	double M[16] = {-sin(th),cos(th),0,0,
+		cos(th)*sin(ph),sin(th)*sin(ph),-cos(ph),0,
+		cos(th)*cos(ph),sin(th)*cos(ph),sin(ph),0,
+		R*cos(ph)*cos(th),R*cos(ph)*sin(th),-R*sin(ph),1};
+	glMultMatrixd(M);
+}

@@ -1,0 +1,22 @@
+<launch>
+
+<!-- GLOBAL PARAMS -->
+    <param name="feedPin" type="int" value="0" />
+    <param name="expBeginSyncPin" type="int" value="7" />
+    <param name="expEndSyncPin" type="int" value="2" />
+    <param name="regSyncPin" type="int" value="3" />
+    <param name="gearRatio" type="int" value="5" />
+    <param name="extEncoderAPFI" type="int" value="0" />
+    <param name="extEncoderBPFI" type="int" value="10" />
+    <param name="intEncoderAPFI" type="int" value="3" />
+    <param name="intEncoderBPFI" type="int" value="11" />
+    <param name="hallZPFI" type="int" value="9" />
+    <param name="hallZPin" type="int" value="6" />
+
+<!-- PARAM DUMPING -->
+    <rosparam command="dump" file="/home/domeros/experiment/params.yaml" />
+
+    <node name="domeDaqInterface" pkg="daq_interface" type="daq_interface" />
+
+<!-- VISUAL and GUI and peripherals are launched in separate terminals -->
+</launch>

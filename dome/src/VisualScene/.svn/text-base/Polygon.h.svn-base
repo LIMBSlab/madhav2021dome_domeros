@@ -1,0 +1,27 @@
+#ifndef POLYGON_H
+#define POLYGON_H
+
+#include "DomeShape.h"
+#include "helper.h"
+#include "GL/gl.h"
+#include <cmath>
+
+
+class Polygon : public DomeShape {
+	public:
+        // Constructors
+		Polygon(void);
+		Polygon(int,double);
+		Polygon(int,double,double,double);
+
+        // Get and set functions
+		int getN(void);
+		double getA(void);
+
+		void render(double);
+
+	private:
+		int n; 			// Number of sides
+		double a; 		// Sides
+};
+#endif

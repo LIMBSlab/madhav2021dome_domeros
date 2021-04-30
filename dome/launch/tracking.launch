@@ -1,0 +1,15 @@
+<launch>
+<!-- Camera nodes should be launched before this -->
+
+<machine
+    name="dometracking"
+    address="dometracking"
+    user="dometracking"
+    timeout="10"
+  />
+
+<!-- TRACKING -->
+    <node name="domeVideoTracker" pkg="ros_marker_tracking" type="tracker_realtime"/>
+    <node name="domeSensorFusion" pkg="ros_limbs_dome_sensor_fusion" type="angle_only" args="/tracking_results /rat_angle"/>
+
+</launch>

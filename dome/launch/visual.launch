@@ -1,0 +1,27 @@
+<launch>
+
+<rosparam file="$(find dome)/config/all_cues.yaml" />
+
+
+<!-- VISUAL -->
+    <node name="domeVisualScene" pkg="dome" type="VisualScene">
+        <param name="fullScreen" type="bool" value="false" />
+        <param name="displayOnly" type="bool" value="false" />
+        <param name="posX" type="int" value="500" />
+        <param name="posY" type="int" value="100" />
+        <param name="width" type="int" value="1000" />
+        <param name="height" type="int" value="1000" />
+        <param name="offset" type="double" value="-61.5" />
+    </node>
+
+    <node name="domeVisualScene_displayOnly" pkg="dome" type="VisualScene">
+        <param name="fullScreen" type="bool" value="false" />
+        <param name="displayOnly" type="bool" value="true" />
+        <param name="posX" type="int" value="100" />
+        <param name="posY" type="int" value="100" />
+        <param name="width" type="int" value="400" />
+        <param name="height" type="int" value="400" />
+        <param name="offset" type="double" value="-61.5" />
+    </node>
+
+</launch>

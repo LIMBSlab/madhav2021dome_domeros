@@ -1,0 +1,12 @@
+<launch>
+
+<machine
+    name="dometracking"
+    address="dometracking"
+    user="dometracking"
+    timeout="10"
+  />
+
+  <node machine="dometracking" cwd="ROS_HOME" name="record_camera" pkg="rosbag" type="record" args="-b 1024 -o domeExperimentCamera /camera/image_mono/compressed_throttle /camera_info"/>
+
+</launch>

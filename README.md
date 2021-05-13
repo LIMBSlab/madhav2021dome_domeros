@@ -40,11 +40,11 @@ We also use the following package repositories in order to operate peripherals a
 
 ROS interface for FLIR (PointGrey) Cameras
 
-### [ros_limbs_dome_sensor_fusion](https://github.com/vagvolgyi/ros_limbs_dome_sensor_fusion)
+#### [ros_limbs_dome_sensor_fusion](https://github.com/vagvolgyi/ros_limbs_dome_sensor_fusion)
 
 Package containing nodes to convert 3D (position and orientation) rat head and body tracking information into 2D position and angle co-ordinates.
 
-### [ros_marker_tracking](https://github.com/vagvolgyi/ros_marker_tracking)
+#### [ros_marker_tracking](https://github.com/vagvolgyi/ros_marker_tracking)
 
 Package containing nodes to track rat's head and body in real-time through single-camera marker tracking.
 
